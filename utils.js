@@ -18,3 +18,31 @@ function getIntersection(A, B, C, D) {
     };
     return intersection;
 }
+
+function polysIntersect(poly1, poly2) {
+    for (let i = 0; i < poly1.length; i++) {
+        const startA = poly1[i];
+        // Last point connects back to the first
+        const endA = poly1[(i + 1) % poly1.length];
+
+        for (let j = 0; j < poly2.length; j++) {
+            const startB = poly2[j];
+            const endB = poly2[(j + 1) % poly2.length];
+
+            const touch = getIntersection(startA, endA, startB, endB);
+            if (touch) {
+                return true; 
+            }
+        }
+    }
+    return false; 
+}
+
+function getRGBA(value){
+    const alpha=Math.abs(value);
+    const R=value<0?0:255;
+    const G=R;
+    const B=value>0?0:255;
+    return "rgba("+R+","+G+","+B+","+alpha+")";
+}
+    
